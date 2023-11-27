@@ -1,11 +1,13 @@
 "use client"
 
 import type { Metadata } from 'next'
-import './globals.css'
+import './globals.sass'
 import { usePathname } from 'next/navigation'
 import { checkIsPublicRoute } from '@/common/check-route'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
+import Provider from '@/components/config/Provider'
+import { UserProvider } from '@/common/utils/userContext'
 
 export default function RootLayout({
   children,
@@ -27,25 +29,27 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {isPublic && (
-          <>
-            <Navbar />
-            <main>
-              {children}
-            </main>
-            <Footer />
-          </>
-        )}
+        <Provider>
+          {isPublic && (
+            <UserProvider>
+              <Navbar />
+              <main className='pt-[150px] selection:bg-[#F2921D] selection:text-white'>
+                {children}
+              </main>
+              <Footer />
+            </UserProvider>
+          )}
 
-        {!isPublic && (
-          <>
-            <Navbar />
-            <main>
-              {children}
-            </main>
-            <Footer />
-          </>
-        )}
+          {!isPublic && (
+            <UserProvider>
+              <Navbar />
+              <main className='pt-[150px] selection:bg-[#F2921D] selection:text-white'>
+                {children}
+              </main>
+              <Footer />
+            </UserProvider>
+          )}
+        </Provider>
       </body>
     </html>
   )
