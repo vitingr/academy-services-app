@@ -2,10 +2,12 @@
 
 import React from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
+import { infoUser } from '@/common/utils/userContext'
 
 const Navbar = () => {
 
   const { data: session } = useSession()
+  const {data} = infoUser()
 
   return (
     <header className='w-full bg-white fixed flex justify-center p-6'>
@@ -20,16 +22,14 @@ const Navbar = () => {
         </ul>
         {session?.user?.email ? (
           <div className='flex items-center gap-6'>
-            <button className='bg-[#F2921D] text-white p-2 rounded-xl w-[150px] selection:bg-transparent' onClick={() => signIn()}>
-              Login
-            </button>
-            <button className='text-[#F2921D] border border-[#F2921D] p-2 rounded-xl w-[150px] selection:bg-transparent' onClick={() => signIn()}>
-              Criar Conta
+            <img src={session?.user?.image || ""} className='w-[40px] h-[40px] rounded-full cursor-pointer selection:bg-transparent' alt="Profile picture" />
+            <button className='bg-[#F2921D] text-white p-2 rounded-xl w-[150px] selection:bg-transparent' onClick={() => signOut()}>
+              Sair
             </button>
           </div>
         ) : (
           <div className='flex items-center gap-6'>
-            <button className='bg-[#F2921D] text-white p-2 rounded-xl w-[150px] selection:bg-transparent' onClick={() => signIn()}>
+            <button className='bg-[#F2921D] text-white p-2 rounded-xl w-[150px] selection:bg-transparent transition-all duration-300 hover:scale-110' onClick={() => signIn()}>
               Login
             </button>
             <button className='text-[#F2921D] border border-[#F2921D] p-2 rounded-xl w-[150px] selection:bg-transparent' onClick={() => signIn()}>

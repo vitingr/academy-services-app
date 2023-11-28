@@ -16,8 +16,8 @@ export interface UserContextProps {
 export interface UserProps {
   id: any;
   name: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   trainingPreference: string;
   premium: boolean;
