@@ -47,7 +47,7 @@ const page = () => {
             </div>
             <div className='w-full flex flex-col'>
               <label htmlFor="lastname" className='text-lg'>Segundo nome</label>
-              <input type="text" name="lastname" id="lastname" className='w-full outline-none pl-4 pr-4 pt-2 pb-2 border border-neutral-200 rounded-lg mt-1 text-sm text-[#717171] mb-8 max-w-[450px]' placeholder='Digite o seu segundo nome' autoComplete='off' minLength={2} maxLength={55} defaultValue={user.lastname || "Carregando..."} required />
+              <input type="text" name="lastname" id="lastname" className='w-full outline-none pl-4 pr-4 pt-2 pb-2 border border-neutral-200 rounded-lg mt-1 text-sm text-[#717171] mb-8 max-w-[450px]' placeholder='Digite o seu segundo nome' autoComplete='off' minLength={2} maxLength={55} defaultValue={user.lastname || "Carregando..."} onChange={(e) => setLastname(e.target.value)} required />
             </div>
           </div>
           <label htmlFor="preference" className='text-lg'>Preferencia de treino</label>

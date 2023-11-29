@@ -23,3 +23,14 @@ export interface UserProps {
   premium: boolean;
 }
 
+export interface ServicePageProps {
+  content?: any
+}
+
+export interface ServiceProps {
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  subscribers: string;
+}
