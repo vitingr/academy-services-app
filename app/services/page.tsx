@@ -14,7 +14,7 @@ const page = () => {
   const [showCreateServiceForm, setShowCreateServiceForm] = useState<boolean>(false)
   const [serviceName, setServiceName] = useState<string>("")
   const [serviceDescription, setServiceDescription] = useState<string>("")
-  const [serviceValue, setServiceValue] = useState<string>("") 
+  const [serviceValue, setServiceValue] = useState<string>("")
 
   const createService = async () => {
     try {
@@ -58,9 +58,11 @@ const page = () => {
   return (
     <div className='w-full flex flex-col items-center p-[2%] sm:p-[5%]'>
       <ToastMessage />
-      {services.map((service: ServiceProps) => (
-        <Service key={service._id} />
-      ))}
+      <div className='flex gap-6 items-center flex-wrap w-full max-w-[1600px] justify-center'>
+        {services.map((service: ServiceProps) => (
+          <Service key={service._id} content={service} />
+        ))}
+      </div>
       {data.admin ? (
         <button className='w-[250px] text-white bg-[#F2921D] rounded-xl p-2 mt-20' onClick={() => setShowCreateServiceForm(!showCreateServiceForm)}>
           Adicionar Serviço

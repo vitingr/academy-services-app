@@ -33,7 +33,7 @@ export default function RootLayout({
           {isPublic && (
             <UserProvider>
               <Navbar />
-              <main className='pt-[150px] selection:bg-[#F2921D] selection:text-white'>
+              <main className='pt-[150px] selection:bg-[#ffcc8e] selection:text-white'>
                 {children}
               </main>
               <Footer />
@@ -43,7 +43,7 @@ export default function RootLayout({
           {!isPublic && (
             <UserProvider>
               <Navbar />
-              <main className='pt-[150px] selection:bg-[#F2921D] selection:text-white'>
+              <main className='pt-[150px] selection:bg-[#ffcc8e] selection:text-white'>
                 {children}
               </main>
               <Footer />
