@@ -17,8 +17,8 @@ const Navbar = () => {
         <ul className='list-none flex items-center gap-12'>
           <li><Link href="/" className='link-nav selection:bg-[#F2921D] selection:text-white'>Início</Link></li>
           <li><Link href="/services" className='link-nav selection:bg-[#F2921D] selection:text-white'>Serviços</Link></li>
-          <li><Link href="/" className='link-nav selection:bg-[#F2921D] selection:text-white'>Parcerias</Link></li>
-          <li><Link href="/" className='link-nav selection:bg-[#F2921D] selection:text-white'>Informações</Link></li>
+          <li><Link href="/association" className='link-nav selection:bg-[#F2921D] selection:text-white'>Parcerias</Link></li>
+          <li><Link href="/info" className='link-nav selection:bg-[#F2921D] selection:text-white'>Informações</Link></li>
           <li><Link href="/" className='link-nav selection:bg-[#F2921D] selection:text-white'>Contato</Link></li>
         </ul>
         {session?.user?.email ? (

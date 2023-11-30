@@ -58,13 +58,14 @@ const page = () => {
   return (
     <div className='w-full flex flex-col items-center p-[2%] sm:p-[5%]'>
       <ToastMessage />
-      <div className='flex gap-6 items-center flex-wrap w-full max-w-[1600px] justify-center'>
+      <h1 className='text-4xl font-semibold'>Nossos Serviços</h1>
+      <div className='flex gap-6 items-center flex-wrap w-full max-w-[1600px] justify-center mt-20'>
         {services.map((service: ServiceProps) => (
           <Service key={service._id} content={service} />
         ))}
       </div>
       {data.admin ? (
-        <button className='w-[250px] text-white bg-[#F2921D] rounded-xl p-2 mt-20' onClick={() => setShowCreateServiceForm(!showCreateServiceForm)}>
+        <button className='w-[250px] text-[#F2921D] underline underline-offset-2 rounded-xl p-2 mt-20' onClick={() => setShowCreateServiceForm(!showCreateServiceForm)}>
           Adicionar Serviço
         </button>
       ) : (<></>)}
@@ -80,7 +81,7 @@ const page = () => {
             <label htmlFor="price" className='text-base'>Preço</label>
             <input type="number" name="price" id="price" className='w-full outline-none pl-4 pr-4 pt-2 pb-2 border border-neutral-200 rounded-lg mt-1 text-sm text-[#717171] mb-8 max-w-[450px]' placeholder='Preço do serviço oferecido' autoComplete='off' min={2} max={300} onChange={(e) => setServiceValue(e.target.value)} required />
 
-            <button type='submit' className='text-white bg-[#F2921D] rounded-xl p-2 w-full selection:bg-transparent mt-10'>
+            <button type='submit' className='text-white bg-[#F2921D] rounded-xl p-2 w-full selection:bg-transparent mt-20'>
               Adicionar Serviço
             </button>
           </form>
