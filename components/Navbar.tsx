@@ -23,7 +23,7 @@ const Navbar = () => {
         </ul>
         {session?.user?.email ? (
           <div className='flex items-center gap-6'>
-            <Link href={`/profile/${data._id}`}>
+            <Link href={`/profile/${data.email}`}>
               <img src={session?.user?.image || ""} className='w-[40px] h-[40px] rounded-full cursor-pointer selection:bg-transparent' alt="Profile picture" />
             </Link>
             <button className='bg-[#F2921D] text-white p-2 rounded-xl w-[150px] selection:bg-transparent' onClick={() => signOut()}>
