@@ -24,7 +24,8 @@ export interface UserProps {
 }
 
 export interface ServicePageProps {
-  content?: any
+  content?: any;
+  handleFunction?: any;
 }
 
 export interface ServiceProps {

@@ -10,10 +10,13 @@ import { toast } from 'react-toastify'
 
 const page = () => {
 
+  const { data: session } = useSession()
+  const { data, getInfo } = infoUser()
+
   const [user, setUser] = useState<UserProps[] | any>([])
 
-  const [firstname, setFirnName] = useState<string>("")
-  const [lastname, setLastname] = useState<string>("")
+  const [firstname, setFirstName] = useState<string>(data.firstname)
+  const [lastname, setLastname] = useState<string>(data.lastname)
   const [state, setState] = useState<string>("")
   const [city, setCity] = useState<string>("")
   const [street, setStreet] = useState<string>("")
@@ -22,10 +25,7 @@ const page = () => {
   const pathname = usePathname().split("/")
   const query = pathname[2]
 
-  const { data: session } = useSession()
-  const { data } = infoUser()
-
-  const getInfo = async () => {
+  const getUserInfo = async () => {
     try {
       const requisition = await fetch(`http://localhost:3030/users/${query}`)
       const response = await requisition.json()
@@ -44,16 +44,17 @@ const page = () => {
         body: JSON.stringify({
           Id: data._id,               
           Name: fullname,               
-          FirstName: firstname,          
-          LastName: lastname,           
+          FirstName: firstname || data.firstname,          
+          LastName: lastname || data.lastname,           
           Email: data.email,              
-          Address: data.address,            
-          TrainingPreference: data.trainingPreference, 
+          Address: data.address || "undefined",            
+          TrainingPreference: data.trainingPreference || "none", 
           Premium: data.premium,            
           Admin: data.admin,
         })
       })
       if (response.ok) {
+        getInfo()
         toast.success("Perfil do usuário foi atualizado!")
       } else {
         toast.error("Não foi possível atualizar o perfil do usuário.")
@@ -64,10 +65,12 @@ const page = () => {
   }
 
   useEffect(() => {
-    getInfo()
-  }, [session])
+    if (query !== "") {
+      getUserInfo()
+    }
+  }, [query])
 
-  return (
+  return data._id !== undefined ? (
     <div className='w-full flex flex-col p-[2%] sm:p-[5%] items-center'>
       <ToastMessage />
       <section className='w-full max-w-[1400px] flex flex-col'>
@@ -79,7 +82,7 @@ const page = () => {
           <div className='flex justify-between gap-6 w-full max-w-[650px]'>
             <div className='w-full flex flex-col'>
               <label htmlFor="firstname" className='text-lg'>Primeiro nome</label>
-              <input type="text" name="firstname" id="firstname" className='w-full outline-none pl-4 pr-4 pt-2 pb-2 border border-neutral-200 rounded-lg mt-1 text-sm text-[#717171] mb-8 max-w-[450px]' placeholder='Digite o seu primeiro nome' autoComplete='off' minLength={2} maxLength={55} defaultValue={data.firstname || "Carregando..."} required />
+              <input type="text" name="firstname" id="firstname" className='w-full outline-none pl-4 pr-4 pt-2 pb-2 border border-neutral-200 rounded-lg mt-1 text-sm text-[#717171] mb-8 max-w-[450px]' placeholder='Digite o seu primeiro nome' autoComplete='off' minLength={2} maxLength={55} onChange={(e) => setFirstName(e.target.value)} defaultValue={data.firstname || "Carregando..."} required />
             </div>
             <div className='w-full flex flex-col'>
               <label htmlFor="lastname" className='text-lg'>Segundo nome</label>
@@ -96,6 +99,8 @@ const page = () => {
         </form>
       </section>
     </div>
+  ) : (
+    <></>
   )
 }
 

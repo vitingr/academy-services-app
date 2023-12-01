@@ -41,7 +41,6 @@ const page = () => {
       const requisition = await fetch("http://localhost:3030/services")
       const response = await requisition.json()
       setServices(response)
-      console.log(response)
     } catch (error) {
       console.log(error)
     }
@@ -61,7 +60,7 @@ const page = () => {
       <h1 className='text-4xl font-semibold'>Nossos Serviços</h1>
       <div className='flex gap-6 items-center flex-wrap w-full max-w-[1600px] justify-center mt-20'>
         {services.map((service: ServiceProps) => (
-          <Service key={service._id} content={service} />
+          <Service key={service._id} content={service} handleFunction={getAllServices()} />
         ))}
       </div>
       {data.admin ? (
